@@ -23,6 +23,7 @@ source "amazon-ebs" "my-ami" {
   region          = "${var.aws_region}"
   ami_name        = "csye7125Jenkins_${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
   ami_description = "AMI for CSYE 7125 Jenkins"
+  ami_users       = [998762610403, 423561986023]
   ami_regions = [
     "us-east-1",
   ]
@@ -49,10 +50,7 @@ source "amazon-ebs" "my-ami" {
 build {
   sources = ["source.amazon-ebs.my-ami"]
 
-//   provisioner "file" {
-//     source      = "Caddyfile"
-//     destination = "/etc/caddy/Caddyfile"
-//   }
+
   provisioner "shell" {
     environment_vars = [
       "DEBIAN_FRONTEND=noninteractive",
@@ -63,10 +61,6 @@ build {
 
   }
 
-//   provisioner "file" {
-//     source      = "flask_app.py"
-//     destination = "/tmp/flask_app.py"
-//   }
 
 
 }
