@@ -1,4 +1,4 @@
-name: CI-AMI
+name: packervalidate-AMI
 
 on:
   pull_request:
