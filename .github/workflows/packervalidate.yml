@@ -14,6 +14,6 @@ jobs:
       - name: Validate Packer Template
         uses: hashicorp/packer-github-actions@master
         with:
-          command: validates
+          command: validate
           arguments: -syntax-only
           target: ami.pkr.hcl
