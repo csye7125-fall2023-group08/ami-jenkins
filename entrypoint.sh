@@ -35,3 +35,9 @@ EOL'
 
 sudo service caddy restart
 
+INITIAL_ADMIN_PASSWORD_FILE="/var/lib/jenkins/secrets/initialAdminPassword"
+JENKINS_INITIAL_ADMIN_PASSWORD=$(sudo -s cat "$INITIAL_ADMIN_PASSWORD_FILE")
+# echo $JENKINS_INITIAL_ADMIN_PASSWORD > jenkins_initial_admin_password.txt
+echo "jenkins_initial_admin_password = $JENKINS_INITIAL_ADMIN_PASSWORD"
+
+
