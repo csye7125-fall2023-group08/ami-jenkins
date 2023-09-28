@@ -25,7 +25,7 @@ variable "ami_name" {
 
 variable "ami_users" {
   type    = list(string)
-  default = [998762610403, 423561986023]
+  default = [998762610403, 423561986023, 268665109736]
 }
 
 variable "instance_type" {
