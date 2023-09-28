@@ -1,6 +1,12 @@
 # ami-jenkins
-## packervalidate.yml 
 
-validates the packer file
+Creates the AMI for jenkins instance with necessary commands.
 
-build packer
+## steps to run
+
+```bash
+packer init packer
+```
+```bash
+packer build packer
+```
