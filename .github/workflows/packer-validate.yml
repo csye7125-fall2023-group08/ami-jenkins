@@ -1,7 +1,13 @@
 name: packervalidate-AMI
 
+env:
+  DOCKER_BUILDKIT: 1
+  COMPOSE_DOCKER_CLI_BUILD: 1
+
 on:
-  pull_request_target:
+  pull_request:
+    branches:
+      - main
       
   workflow_dispatch:
 
@@ -16,4 +22,4 @@ jobs:
         with:
           command: validate
           arguments: -syntax-only
-          target: ami.pkr.hcl
+          target: packer/ami.pkr.hcl
