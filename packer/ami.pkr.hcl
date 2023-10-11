@@ -75,7 +75,7 @@ build {
   sources = ["source.amazon-ebs.jenkins-ami"]
 
   provisioner "file" {
-    source      = "../ami-jenkins"
+    source      = "packer"
     destination = "/home/ubuntu/ami-jenkins"
   }
 
