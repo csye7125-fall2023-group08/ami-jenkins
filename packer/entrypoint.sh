@@ -25,6 +25,7 @@ sudo systemctl start jenkins
 sudo apt-get update
 sudo apt-get install nginx -y
 
+ls -lrth /home/ubuntu/
 sudo cp -f /home/ubuntu/packer/nginx.conf /etc/nginx/
 
 # Edit Nginx file for reverse proxy
