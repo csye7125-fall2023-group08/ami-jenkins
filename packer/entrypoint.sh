@@ -21,32 +21,19 @@ sudo systemctl enable jenkins
 sudo systemctl start jenkins
 
 
-# Install Caddy
-sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
-curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
-curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
-sudo apt update
-sudo apt install caddy
+# Install Nginx
+sudo apt-get update
+sudo apt-get install nginx -y
 
+sudo cp -f /home/ubuntu/ami-jenkins/packer/nginx.conf /etc/nginx/
 
-# Edit Caddy file for reverse proxy
-sudo sh -c 'cat <<EOL > /etc/caddy/Caddyfile
-jenkins.csye7125-mm.net {
-    reverse_proxy localhost:8080
-}
-
-jenkins.vaibhavmahajan.in {
-    reverse_proxy localhost:8080
-}
-
-jenkins.rebeccabiju.pro {
-    reverse_proxy localhost:8080
-}
-EOL'
-
+# Edit Nginx file for reverse proxy
+printf "%s" "$PUBLIC_KEY" > /home/ubuntu/fullchain.pem
+printf "%s" "$PRIVATE_KEY" > /home/ubuntu/privkey.pem
 
 # Start Caddy
-sudo service caddy restart
+sudo systemctl enable nginx
+sudo systemctl restart nginx
 
 # Print jenkins admin password for UI use
 INITIAL_ADMIN_PASSWORD_FILE="/var/lib/jenkins/secrets/initialAdminPassword"
