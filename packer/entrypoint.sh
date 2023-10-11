@@ -25,7 +25,7 @@ sudo systemctl start jenkins
 sudo apt-get update
 sudo apt-get install nginx -y
 
-sudo cp -f /home/ubuntu/ami-jenkins/packer/nginx.conf /etc/nginx/
+sudo cp -f /home/ubuntu/packer/nginx.conf /etc/nginx/
 
 # Edit Nginx file for reverse proxy
 printf "%s" "$PUBLIC_KEY" > /home/ubuntu/fullchain.pem
