@@ -33,7 +33,17 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
+variable "public_key" {
+  type    = string
+}
+
+variable "private_key" {
+  type    = string
+}
+
+
 source "amazon-ebs" "jenkins-ami" {
+  profile         = "jenkins"
   region          = "${var.aws_region}"
   ami_name        = "csye7125Jenkins_${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
   ami_description = "AMI for CSYE 7125 Jenkins"
@@ -64,11 +74,18 @@ source "amazon-ebs" "jenkins-ami" {
 build {
   sources = ["source.amazon-ebs.jenkins-ami"]
 
+  provisioner "file" {
+    source      = "./packer"
+    destination = "/home/ubuntu/packer"
+  }
+
 
   provisioner "shell" {
     environment_vars = [
       "DEBIAN_FRONTEND=noninteractive",
-      "CHECKPOINT_DISABLE=1"
+      "CHECKPOINT_DISABLE=1",
+      "PUBLIC_KEY=${var.public_key}",
+      "PRIVATE_KEY=${var.private_key}"
     ]
     script = "packer/entrypoint.sh"
   }
