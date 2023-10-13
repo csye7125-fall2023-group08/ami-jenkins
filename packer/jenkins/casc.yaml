@@ -1,0 +1,54 @@
+jenkins:
+  systemMessage: "Automating Jenkins Setup using Docker and Jenkins Configuration as Code"
+
+  remotingSecurity:
+    enabled: true
+
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "${JENKINS_ADMIN_ID}"
+          password: "${JENKINS_ADMIN_PASSWORD}"
+
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "Overall/Administer:admin"
+        - "Overall/Read:authenticated"
+
+security:
+  gitHostKeyVerificationConfiguration:
+    sshHostKeyVerificationStrategy: "noHostKeyVerificationStrategy"
+
+  queueItemAuthenticator:
+    authenticators:
+      - global:
+          strategy: triggeringUsersAuthorizationStrategy
+
+credentials:
+   system:
+     domainCredentials:
+         - credentials:
+              - basicSSHUserPrivateKey:
+                      scope: GLOBAL
+                      id: ssh-github
+                      username: manapati.m@northeastern.edu
+                      description: "SSH key for Github"
+                      privateKeySource:
+                        directEntry:
+                          privateKey: "${KEY}"
+              - usernamepassword:
+                       scope: GLOBAL
+                       id: "docker-registry-credentials"
+                       username: "${QUAY_ADMIN_ID}"
+                       password: "${QUAY_PASSWORD}"
+                       description: "Docker quay creds"
+unclassified:
+  location:
+    url: "http://127.0.0.1:8080/"
+
+jobs:
+  - file: "/usr/local/webapp.groovy"
+  - file: "/usr/local/webapp-db.groovy"
+

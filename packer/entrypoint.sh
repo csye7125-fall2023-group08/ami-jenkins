@@ -6,20 +6,25 @@ sudo apt-get upgrade -y
 sudo apt-get install -y default-jre
 
 
-# Install Jenkins
-curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
-  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
-echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
-  /etc/apt/sources.list.d/jenkins.list > /dev/null
+# Install Docker
+# Add Docker's official GPG key:
 sudo apt-get update
-sudo apt-get install jenkins -y
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
+# Add the repository to Apt sources:
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+sudo systemctl enable docker
+sudo systemctl start docker
 
-# Enable jenkins for autostart
-sudo systemctl enable jenkins
-sudo systemctl start jenkins
-
+sudo usermod -aG docker $USER
 
 # Install Nginx
 sudo apt-get update
@@ -32,13 +37,8 @@ sudo cp -f /home/ubuntu/packer/nginx.conf /etc/nginx/
 printf "%s" "$PUBLIC_KEY" > /home/ubuntu/fullchain.pem
 printf "%s" "$PRIVATE_KEY" > /home/ubuntu/privkey.pem
 
-# Start Caddy
+# Start Nginx
 sudo systemctl enable nginx
 sudo systemctl restart nginx
-
-# Print jenkins admin password for UI use
-INITIAL_ADMIN_PASSWORD_FILE="/var/lib/jenkins/secrets/initialAdminPassword"
-JENKINS_INITIAL_ADMIN_PASSWORD=$(sudo -s cat "$INITIAL_ADMIN_PASSWORD_FILE")
-echo "jenkins_initial_admin_password = $JENKINS_INITIAL_ADMIN_PASSWORD"
 
 
