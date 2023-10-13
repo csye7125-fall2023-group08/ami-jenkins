@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 *.pkrvars.hcl
 *.DS_Store
+
+.local.env
