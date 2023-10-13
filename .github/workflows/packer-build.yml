@@ -12,6 +12,32 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+<<<<<<< HEAD
+=======
+      - name: Replace Secrets
+        run: |
+          # Access the secret values
+          ADMIN_ID="${{ secrets.JENKINS_ADMIN_ID }}"
+          ADMIN_PASSWORD="${{ secrets.JENKINS_ADMIN_PASSWORD }}"
+          KEY="${{ secrets.KEY }}"
+          QUAY_ADMIN_ID="${{ secrets.QUAY_ADMIN_ID }}"
+          QUAY_PASSWORD="${{ secrets.QUAY_PASSWORD }}"
+
+          # Replace secrets in the .docker.env file
+          sed -i ''  "s/\${{ secrets.JENKINS_ADMIN_ID }}/$JENKINS_ADMIN_ID/g" .docker.env
+          sed -i ''  "s/\${{ secrets.JENKINS_ADMIN_PASSWORD }}/$JENKINS_ADMIN_PASSWORD/g" .docker.env
+          sed -i ''  's/\${{ secrets.KEY }}/$KEY/g' .docker.env
+          sed -i ''  "s/\${{ secrets.QUAY_ADMIN_ID }}/$QUAY_ADMIN_ID/g" .docker.env
+          sed -i ''  "s/\${{ secrets.QUAY_PASSWORD }}/$QUAY_PASSWORD/g" .docker.env
+        env:
+            ADMIN_ID: ${{ secrets.JENKINS_ADMIN_ID }}
+            ADMIN_PASSWORD: ${{ secrets.JENKINS_ADMIN_PASSWORD }}
+            KEY: ${{ secrets.KEY }}
+            QUAY_ADMIN_ID: ${{ secrets.QUAY_ADMIN_ID }}
+            QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
+
+
+>>>>>>> 51a07b0 (checking the config replace)
       - name: Validate Packer Template
         uses: hashicorp/packer-github-actions@master
         with:
