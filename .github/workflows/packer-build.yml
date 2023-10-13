@@ -39,6 +39,7 @@ jobs:
               QUAY_PASSWORD="$QUAY_PASSWORD"
               EOL
               cat .docker.env
+
         env:
             ADMIN_ID: ${{ secrets.JENKINS_ADMIN_ID }}
             ADMIN_PASSWORD: ${{ secrets.JENKINS_ADMIN_PASSWORD }}
