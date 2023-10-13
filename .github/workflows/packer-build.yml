@@ -14,27 +14,32 @@ jobs:
 
       - name: Replace Secrets
         run: |
-          # Access the secret values
+              # Access the secret values
 
           
-          cd packer/jenkins
-          ls
-          
-          ADMIN_ID="${{ secrets.JENKINS_ADMIN_ID }}"
-          ADMIN_PASSWORD="${{ secrets.JENKINS_ADMIN_PASSWORD }}"
-          TOKEN="${{ secrets.TOKEN }}"
-          USERNAME="${{ secrets.USERNAME }}"
-          QUAY_ADMIN_ID="${{ secrets.QUAY_ADMIN_ID }}"
-          QUAY_PASSWORD="${{ secrets.QUAY_PASSWORD }}"
+              cd packer/jenkins
+              ls -al
+        
+              JENKINS_ADMIN_ID="${{ secrets.JENKINS_ADMIN_ID }}"
+              JENKINS_ADMIN_PASSWORD="${{ secrets.JENKINS_ADMIN_PASSWORD }}"
+              TOKEN="${{ secrets.TOKEN }}"
+              USERNAME="${{ secrets.USERNAME }}"
+              QUAY_ADMIN_ID="${{ secrets.QUAY_ADMIN_ID }}"
+              QUAY_PASSWORD="${{ secrets.QUAY_PASSWORD }}"
 
-          # Replace secrets in the .docker.env file
+  
 
-          sed -i ''  "s/\{{ secrets.JENKINS_ADMIN_ID }}/$JENKINS_ADMIN_ID/g" .docker.env
-          sed -i ''  "s/\{{ secrets.JENKINS_ADMIN_PASSWORD }}/$JENKINS_ADMIN_PASSWORD/g" .docker.env
-          sed -i ''  's/\{{ secrets.TOKEN }}'/$TOKEN/g .docker.env
-          sed -i ''  's/\{{ secrets.USERNAME }}'/$USERNAME/g .docker.env
-          sed -i ''  "s/\{{ secrets.QUAY_ADMIN_ID }}/$QUAY_ADMIN_ID/g" .docker.env
-          sed -i ''  "s/\{{ secrets.QUAY_PASSWORD }}/$QUAY_PASSWORD/g" .docker.env
+              # Write the environment variables to a file
+              cat <<EOL > .docker.env
+              JENKINS_ADMIN_ID="$JENKINS_ADMIN_ID"
+              JENKINS_ADMIN_PASSWORD="$JENKINS_ADMIN_PASSWORD"
+              TOKEN="$TOKEN"
+              USERNAME="$USERNAME"
+              QUAY_ADMIN_ID="$QUAY_ADMIN_ID"
+              QUAY_PASSWORD="$QUAY_PASSWORD"
+              EOL
+              cat .docker.env
+
         env:
             ADMIN_ID: ${{ secrets.JENKINS_ADMIN_ID }}
             ADMIN_PASSWORD: ${{ secrets.JENKINS_ADMIN_PASSWORD }}
