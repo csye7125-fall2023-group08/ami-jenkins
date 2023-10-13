@@ -16,12 +16,14 @@ jobs:
         run: |
           # Access the secret values
 
-          ls 
+          
           cd packer/jenkins
-
+          ls
+          
           ADMIN_ID="${{ secrets.JENKINS_ADMIN_ID }}"
           ADMIN_PASSWORD="${{ secrets.JENKINS_ADMIN_PASSWORD }}"
-          KEY="${{ secrets.KEY }}"
+          TOKEN="${{ secrets.TOKEN }}"
+          USERNAME="${{ secrets.USERNAME }}"
           QUAY_ADMIN_ID="${{ secrets.QUAY_ADMIN_ID }}"
           QUAY_PASSWORD="${{ secrets.QUAY_PASSWORD }}"
 
@@ -29,13 +31,15 @@ jobs:
 
           sed -i ''  "s/\{{ secrets.JENKINS_ADMIN_ID }}/$JENKINS_ADMIN_ID/g" .docker.env
           sed -i ''  "s/\{{ secrets.JENKINS_ADMIN_PASSWORD }}/$JENKINS_ADMIN_PASSWORD/g" .docker.env
-          sed -i ''  's/\{{ secrets.KEY }}'/$KEY/g .docker.env
+          sed -i ''  's/\{{ secrets.TOKEN }}'/$TOKEN/g .docker.env
+          sed -i ''  's/\{{ secrets.USERNAME }}'/$USERNAME/g .docker.env
           sed -i ''  "s/\{{ secrets.QUAY_ADMIN_ID }}/$QUAY_ADMIN_ID/g" .docker.env
           sed -i ''  "s/\{{ secrets.QUAY_PASSWORD }}/$QUAY_PASSWORD/g" .docker.env
         env:
             ADMIN_ID: ${{ secrets.JENKINS_ADMIN_ID }}
             ADMIN_PASSWORD: ${{ secrets.JENKINS_ADMIN_PASSWORD }}
-            KEY: ${{ secrets.KEY }}
+            TOKEN: ${{ secrets.TOKEN }}
+            USERNAME: ${{ secrets.USERNAME }}
             QUAY_ADMIN_ID: ${{ secrets.QUAY_ADMIN_ID }}
             QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
 

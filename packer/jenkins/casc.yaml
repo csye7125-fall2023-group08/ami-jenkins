@@ -30,20 +30,18 @@ credentials:
    system:
      domainCredentials:
          - credentials:
-              - basicSSHUserPrivateKey:
-                      scope: GLOBAL
-                      id: ssh-github
-                      username: manapati.m@northeastern.edu
-                      description: "SSH key for Github"
-                      privateKeySource:
-                        directEntry:
-                          privateKey: "${KEY}"
               - usernamepassword:
                        scope: GLOBAL
                        id: "docker-registry-credentials"
                        username: "${QUAY_ADMIN_ID}"
                        password: "${QUAY_PASSWORD}"
                        description: "Docker quay creds"
+              - usernamepassword:
+                       scope: GLOBAL
+                       id: "token-github"
+                       username: "${USERNAME}"
+                       password: "${TOKEN}"
+                       description: "Github token"
 unclassified:
   location:
     url: "http://127.0.0.1:8080/"
