@@ -12,6 +12,40 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Replace Secrets
+        run: |
+          # Access the secret values
+
+          
+          cd packer/jenkins
+          ls
+          
+          ADMIN_ID="${{ secrets.JENKINS_ADMIN_ID }}"
+          ADMIN_PASSWORD="${{ secrets.JENKINS_ADMIN_PASSWORD }}"
+          TOKEN="${{ secrets.TOKEN }}"
+          USERNAME="${{ secrets.USERNAME }}"
+          QUAY_ADMIN_ID="${{ secrets.QUAY_ADMIN_ID }}"
+          QUAY_PASSWORD="${{ secrets.QUAY_PASSWORD }}"
+
+          # Replace secrets in the .docker.env file
+
+          sed -i ''  "s/\{{ secrets.JENKINS_ADMIN_ID }}/$JENKINS_ADMIN_ID/g" .docker.env
+          sed -i ''  "s/\{{ secrets.JENKINS_ADMIN_PASSWORD }}/$JENKINS_ADMIN_PASSWORD/g" .docker.env
+          sed -i ''  's/\{{ secrets.TOKEN }}'/$TOKEN/g .docker.env
+          sed -i ''  's/\{{ secrets.USERNAME }}'/$USERNAME/g .docker.env
+          sed -i ''  "s/\{{ secrets.QUAY_ADMIN_ID }}/$QUAY_ADMIN_ID/g" .docker.env
+          sed -i ''  "s/\{{ secrets.QUAY_PASSWORD }}/$QUAY_PASSWORD/g" .docker.env
+        env:
+            ADMIN_ID: ${{ secrets.JENKINS_ADMIN_ID }}
+            ADMIN_PASSWORD: ${{ secrets.JENKINS_ADMIN_PASSWORD }}
+            TOKEN: ${{ secrets.TOKEN }}
+            USERNAME: ${{ secrets.USERNAME }}
+            QUAY_ADMIN_ID: ${{ secrets.QUAY_ADMIN_ID }}
+            QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
+
+
+
+
       - name: Validate Packer Template
         uses: hashicorp/packer-github-actions@master
         with:
@@ -22,6 +56,11 @@ jobs:
           PACKER_LOG: 1
           PKR_VAR_public_key: ${{ secrets.PUBLIC_SSL_KEY }}
           PKR_VAR_private_key: ${{ secrets.PRIVATE_SSL_KEY }}
+          ADMIN_ID: ${{ secrets.JENKINS_ADMIN_ID }}
+          ADMIN_PASSWORD: ${{ secrets.JENKINS_ADMIN_PASSWORD }}
+          KEY: ${{ secrets.KEY }}
+          QUAY_ADMIN_ID: ${{ secrets.QUAY_ADMIN_ID }}
+          QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
 
       - name: Build Artifact packer AMI
         uses: hashicorp/packer-github-actions@master
@@ -35,3 +74,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           PKR_VAR_public_key: ${{ secrets.PUBLIC_SSL_KEY }}
           PKR_VAR_private_key: ${{ secrets.PRIVATE_SSL_KEY }}
+          ADMIN_ID: ${{ secrets.JENKINS_ADMIN_ID }}
+          ADMIN_PASSWORD: ${{ secrets.JENKINS_ADMIN_PASSWORD }}
+          KEY: ${{ secrets.KEY }}
+          QUAY_ADMIN_ID: ${{ secrets.QUAY_ADMIN_ID }}
+          QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
