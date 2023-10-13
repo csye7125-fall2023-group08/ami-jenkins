@@ -26,6 +26,7 @@ jobs:
           QUAY_PASSWORD="${{ secrets.QUAY_PASSWORD }}"
 
           # Replace secrets in the .docker.env file
+
           sed -i ''  "s/\{{ secrets.JENKINS_ADMIN_ID }}/$JENKINS_ADMIN_ID/g" .docker.env
           sed -i ''  "s/\{{ secrets.JENKINS_ADMIN_PASSWORD }}/$JENKINS_ADMIN_PASSWORD/g" .docker.env
           sed -i ''  's/\{{ secrets.KEY }}'/$KEY/g .docker.env
