@@ -11,27 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Replace Secrets
-        run: |        
-          ADMIN_ID="${{ secrets.JENKINS_ADMIN_ID }}"
-          ADMIN_PASSWORD="${{ secrets.JENKINS_ADMIN_PASSWORD }}"
-          KEY="${{ secrets.KEY }}"
-          QUAY_ADMIN_ID="${{ secrets.QUAY_ADMIN_ID }}"
-          QUAY_PASSWORD="${{ secrets.QUAY_PASSWORD }}"
 
-          # Replace placeholders in your configuration file
-          sed -i "s/\${{ secrets.JENKINS_ADMIN_ID }}/$ADMIN_ID/g" packer/jenkins/.docker.env
-          sed -i "s/\${{ secrets.JENKINS_ADMIN_PASSWORD }}/$ADMIN_PASSWORD/g" packer/jenkins/.docker.env
-          sed -i "s/\${{ secrets.KEY }}/$GITHUB_KEY/g" packer/jenkins/.docker.env
-          sed -i "s/\${{ secrets.QUAY_ADMIN_ID }}/$QUAY_ADMIN_ID/g" packer/jenkins/.docker.env
-          sed -i "s/\${{ secrets.QUAY_PASSWORD }}/$QUAY_PASSWORD/g" packer/jenkins/.docker.env
-        env:
-          ADMIN_ID: ${{ secrets.JENKINS_ADMIN_ID }}
-          ADMIN_PASSWORD: ${{ secrets.JENKINS_ADMIN_PASSWORD }}
-          KEY: ${{ secrets.KEY }}
-          QUAY_ADMIN_ID: ${{ secrets.QUAY_ADMIN_ID }}
-          QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
       - name: Validate Packer Template
         uses: hashicorp/packer-github-actions@master
         with:
@@ -42,6 +22,11 @@ jobs:
           PACKER_LOG: 1
           PKR_VAR_public_key: ${{ secrets.PUBLIC_SSL_KEY }}
           PKR_VAR_private_key: ${{ secrets.PRIVATE_SSL_KEY }}
+          ADMIN_ID: ${{ secrets.JENKINS_ADMIN_ID }}
+          ADMIN_PASSWORD: ${{ secrets.JENKINS_ADMIN_PASSWORD }}
+          KEY: ${{ secrets.KEY }}
+          QUAY_ADMIN_ID: ${{ secrets.QUAY_ADMIN_ID }}
+          QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
 
       - name: Build Artifact packer AMI
         uses: hashicorp/packer-github-actions@master
@@ -55,3 +40,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           PKR_VAR_public_key: ${{ secrets.PUBLIC_SSL_KEY }}
           PKR_VAR_private_key: ${{ secrets.PRIVATE_SSL_KEY }}
+          ADMIN_ID: ${{ secrets.JENKINS_ADMIN_ID }}
+          ADMIN_PASSWORD: ${{ secrets.JENKINS_ADMIN_PASSWORD }}
+          KEY: ${{ secrets.KEY }}
+          QUAY_ADMIN_ID: ${{ secrets.QUAY_ADMIN_ID }}
+          QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
