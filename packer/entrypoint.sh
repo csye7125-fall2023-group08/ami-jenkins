@@ -33,12 +33,10 @@ sudo apt-get install nginx -y
 sudo cp -f /home/ubuntu/packer/nginx.conf /etc/nginx/
 
 #Install Certbot
-sudo apt install certbot python3-certbot-nginx
-sudo certbot --nginx -d jenkins.rebeccabiju.pro -d jenkins.vaibhavmahajan.in -d jenkins.csye7125-mm.net
+sudo apt install certbot python3-certbot-nginx -y
 
 # Start Nginx
-sudo nginx -t
 sudo systemctl enable nginx
-sudo systemctl restart nginx
+#sudo systemctl restart nginx
 
 
