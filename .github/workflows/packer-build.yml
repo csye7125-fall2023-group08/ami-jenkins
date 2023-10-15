@@ -59,8 +59,6 @@ jobs:
           target: packer/ami.pkr.hcl
         env:
           PACKER_LOG: 1
-          PKR_VAR_public_key: ${{ secrets.PUBLIC_SSL_KEY }}
-          PKR_VAR_private_key: ${{ secrets.PRIVATE_SSL_KEY }}
           ADMIN_ID: ${{ secrets.JENKINS_ADMIN_ID }}
           ADMIN_PASSWORD: ${{ secrets.JENKINS_ADMIN_PASSWORD }}
           KEY: ${{ secrets.KEY }}
@@ -77,8 +75,6 @@ jobs:
           PACKER_LOG: 1
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          PKR_VAR_public_key: ${{ secrets.PUBLIC_SSL_KEY }}
-          PKR_VAR_private_key: ${{ secrets.PRIVATE_SSL_KEY }}
           ADMIN_ID: ${{ secrets.JENKINS_ADMIN_ID }}
           ADMIN_PASSWORD: ${{ secrets.JENKINS_ADMIN_PASSWORD }}
           KEY: ${{ secrets.KEY }}

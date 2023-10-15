@@ -33,15 +33,6 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-variable "public_key" {
-  type    = string
-}
-
-variable "private_key" {
-  type    = string
-}
-
-
 source "amazon-ebs" "jenkins-ami" {
   profile         = "jenkins"
   region          = "${var.aws_region}"
@@ -83,9 +74,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "DEBIAN_FRONTEND=noninteractive",
-      "CHECKPOINT_DISABLE=1",
-      "PUBLIC_KEY=${var.public_key}",
-      "PRIVATE_KEY=${var.private_key}"
+      "CHECKPOINT_DISABLE=1"
     ]
     script = "packer/entrypoint.sh"
   }
