@@ -7,12 +7,26 @@ multibranchPipelineJob('webapp-DB') {
             credentialsId('token-github')
             configure { node ->
                 def webhookTrigger = node / triggers / 'com.igalg.jenkins.plugins.mswt.trigger.ComputedFolderWebHookTrigger' {
-                spec('')
-                token("webapp-db")
+                    spec('')
+                    token("webapp-db")
+                }
             }
         }
-        }
     }
-   
+
+    configure {
+        def traitBlock = it / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits'
+        traitBlock << 'jenkins.plugins.git.traits.CloneOptionTrait' {
+            extension(class: 'hudson.plugins.git.extensions.impl.CloneOption') {
+                shallow(false)
+                noTag(false)
+                reference()
+                depth(0)
+                honorRefspec(false)
+            }
+        }
+
+        traitBlock << 'jenkins.plugins.git.traits.BranchDiscoveryTrait' { }
+    }
     
 }
