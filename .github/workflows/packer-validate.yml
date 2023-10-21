@@ -25,5 +25,3 @@ jobs:
           target: packer/ami.pkr.hcl
         env:
           PACKER_LOG: 1
-          PKR_VAR_public_key: ${{ secrets.PUBLIC_SSL_KEY }}
-          PKR_VAR_private_key: ${{ secrets.PRIVATE_SSL_KEY }}

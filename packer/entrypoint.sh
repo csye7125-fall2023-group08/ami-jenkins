@@ -30,15 +30,13 @@ sudo usermod -aG docker $USER
 sudo apt-get update
 sudo apt-get install nginx -y
 
-ls -lrth /home/ubuntu/
 sudo cp -f /home/ubuntu/packer/nginx.conf /etc/nginx/
 
-# Edit Nginx file for reverse proxy
-printf "%s" "$PUBLIC_KEY" > /home/ubuntu/fullchain.pem
-printf "%s" "$PRIVATE_KEY" > /home/ubuntu/privkey.pem
+#Install Certbot
+sudo apt install certbot python3-certbot-nginx -y
 
 # Start Nginx
 sudo systemctl enable nginx
-sudo systemctl restart nginx
+#sudo systemctl restart nginx
 
 
