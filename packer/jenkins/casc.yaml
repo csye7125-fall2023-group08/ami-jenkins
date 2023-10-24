@@ -27,21 +27,21 @@ security:
           strategy: triggeringUsersAuthorizationStrategy
 
 credentials:
-   system:
-     domainCredentials:
-         - credentials:
-              - usernamepassword:
-                       scope: GLOBAL
-                       id: "docker-registry-credentials"
-                       username: "${QUAY_ADMIN_ID}"
-                       password: "${QUAY_PASSWORD}"
-                       description: "Docker quay creds"
-              - usernamepassword:
-                       scope: GLOBAL
-                       id: "token-github"
-                       username: "${USERNAME}"
-                       password: "${TOKEN}"
-                       description: "Github token"
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamepassword:
+              scope: GLOBAL
+              id: "docker-registry-credentials"
+              username: "${QUAY_ADMIN_ID}"
+              password: "${QUAY_PASSWORD}"
+              description: "Docker quay creds"
+          - usernamepassword:
+              scope: GLOBAL
+              id: "token-github"
+              username: "${USERNAME}"
+              password: "${GH_TOKEN}"
+              description: "Github token"
 unclassified:
   location:
     url: "http://127.0.0.1:8080/"
@@ -49,4 +49,5 @@ unclassified:
 jobs:
   - file: "/usr/local/webapp.groovy"
   - file: "/usr/local/webapp-db.groovy"
+  - file: "/usr/local/webapp-helm-chart.groovy"
 
