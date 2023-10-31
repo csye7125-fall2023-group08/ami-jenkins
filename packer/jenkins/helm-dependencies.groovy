@@ -1,5 +1,5 @@
 multibranchPipelineJob('webapp-helm-chart') {
-    displayName('webapp_helm_chart_pipeline')
+    displayName('webapp_helm_dependency')
     branchSources {
         git {
             id('123456789-helm-dependencies') // IMPORTANT: use a constant and unique identifier
