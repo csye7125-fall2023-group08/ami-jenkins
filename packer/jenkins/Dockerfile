@@ -37,3 +37,4 @@ COPY casc.yaml /var/jenkins_home/casc.yaml
 COPY webapp.groovy /usr/local/webapp.groovy
 COPY webapp-db.groovy /usr/local/webapp-db.groovy
 COPY webapp-helm-chart.groovy /usr/local/webapp-helm-chart.groovy
+COPY helm-dependencies.groovy /usr/local/helm-dependencies.groovy
