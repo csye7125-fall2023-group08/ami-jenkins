@@ -1,4 +1,4 @@
-multibranchPipelineJob('webapp-helm-chart') {
+multibranchPipelineJob('webapp-helm-dependency') {
     displayName('webapp_helm_dependency')
     branchSources {
         git {
