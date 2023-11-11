@@ -51,5 +51,6 @@ jobs:
   - file: "/usr/local/webapp-db.groovy"
   - file: "/usr/local/webapp-helm-chart.groovy"
   - file: "/usr/local/helm-dependencies.groovy"
+  - file: "/usr/local/health-check-results.groovy"
 
 
