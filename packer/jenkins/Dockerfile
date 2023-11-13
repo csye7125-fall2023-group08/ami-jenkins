@@ -39,3 +39,4 @@ COPY webapp-db.groovy /usr/local/webapp-db.groovy
 COPY webapp-helm-chart.groovy /usr/local/webapp-helm-chart.groovy
 COPY helm-dependencies.groovy /usr/local/helm-dependencies.groovy
 COPY health-check-results.groovy /usr/local/health-check-results.groovy
+COPY perform-health-check.groovy /usr/local/perform-health-check.groovy
