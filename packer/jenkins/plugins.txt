@@ -30,3 +30,6 @@ authorize-project:latest
 workflow-multibranch:latest
 pipeline-multibranch-defaults:latest
 multibranch-scan-webhook-trigger:latest
+google-kubernetes-engine:latest
+pipeline-utility-steps:latest
+gcloud-sdk:latest
