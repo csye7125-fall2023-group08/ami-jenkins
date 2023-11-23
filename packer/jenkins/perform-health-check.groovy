@@ -8,7 +8,7 @@ multibranchPipelineJob('perform-health-check') {
             configure { node ->
                 def webhookTrigger = node / triggers / 'com.igalg.jenkins.plugins.mswt.trigger.ComputedFolderWebHookTrigger' {
                     spec('')
-                    token("health-check-results")
+                    token("perform-health-check")
                 }
             }
         }
