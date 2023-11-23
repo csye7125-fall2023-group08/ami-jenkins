@@ -53,5 +53,6 @@ jobs:
   - file: "/usr/local/helm-dependencies.groovy"
   - file: "/usr/local/health-check-results.groovy"
   - file: "/usr/local/perform-health-check.groovy"
+  - file: "/usr/local/health-check-operator.groovy"
 
 
