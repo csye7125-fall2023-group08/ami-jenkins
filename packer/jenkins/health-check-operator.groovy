@@ -3,12 +3,12 @@ multibranchPipelineJob('health-check-operator') {
     branchSources {
         git {
             id('123456789-operator') // IMPORTANT: use a constant and unique identifier
-            remote('https://github.com/csye7125-fall2023-group08/health-check-operator-test.git')
+            remote('https://github.com/csye7125-fall2023-group08/health-check-operator.git')
             credentialsId('token-github')
             configure { node ->
                 def webhookTrigger = node / triggers / 'com.igalg.jenkins.plugins.mswt.trigger.ComputedFolderWebHookTrigger' {
                     spec('')
-                    token("health-check-operator-test")
+                    token("health-check-operator")
                 }
             }
         }
