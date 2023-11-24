@@ -11,7 +11,7 @@ services:
     env_file:
       - .docker.env
     volumes:
-      - /usr/bin/docker:/usr/bin/docker
+      # - /usr/bin/docker:/usr/bin/docker
       - /var/run/docker.sock:/var/run/docker.sock
     user: root
     ports:
