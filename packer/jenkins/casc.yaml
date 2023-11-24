@@ -42,6 +42,37 @@ credentials:
               username: "${USERNAME}"
               password: "${GH_TOKEN}"
               description: "Github token"
+          - string:
+              scope: GLOBAL
+              id: "google-credentials"
+              secret: "${GOOGLE_CREDENTIALS}"
+              description: "Google credentials service account"
+          - string:
+              scope: GLOBAL
+              id: "cluster-name"
+              secret: "${CLUSTER_NAME}"
+              description: "Cluster name of GKE"
+          - string:
+              scope: GLOBAL
+              id: "image-pull-secret"
+              secret: "${QUAY_SECRET}"
+              description: "Secret of quay repository"
+          - string:
+              scope: GLOBAL
+              id: "perform-health-check-image"
+              secret: "${PERFORM_HEALTH_CHECK_IMAGE}"
+              description: "Perform health check image URL"
+          - string:
+              scope: GLOBAL
+              id: "kafka-topic"
+              secret: "${KAFKA_TOPIC}"
+              description: "Perform health check image URL"
+          - string:
+              scope: GLOBAL
+              id: "operator-namespace"
+              secret: "${OPERATOR_NAMESPACE}"
+              description: "Namespace of operator"
+          
 unclassified:
   location:
     url: "http://127.0.0.1:8080/"
