@@ -16,6 +16,23 @@ jenkins:
       permissions:
         - "Overall/Administer:admin"
         - "Overall/Read:authenticated"
+  globalNodeProperties:
+  - envVars:
+      env:
+      - key: "googleApplicationCredentials"
+        value: "${GOOGLE_CREDENTIALS}"
+      - key: "clusterName"
+        value: "${CLUSTER_NAME}"
+      - key: "quaySecret"
+        value: "${QUAY_SECRET}"
+      - key: "performHealthCheckImage"
+        value: "${PERFORM_HEALTH_CHECK_IMAGE}"
+      - key: "kafkaTopic"
+        value: "${KAFKA_TOPIC}"
+      - key: "operatorNamespace"
+        value: "${OPERATOR_NAMESPACE}"
+      - key: "kafkaNamespace"
+        value: "${KAFKA_NAMESPACE}"
 
 security:
   gitHostKeyVerificationConfiguration:
@@ -42,36 +59,6 @@ credentials:
               username: "${USERNAME}"
               password: "${GH_TOKEN}"
               description: "Github token"
-          - string:
-              scope: GLOBAL
-              id: "google-credentials"
-              secret: "${GOOGLE_CREDENTIALS}"
-              description: "Google credentials service account"
-          - string:
-              scope: GLOBAL
-              id: "cluster-name"
-              secret: "${CLUSTER_NAME}"
-              description: "Cluster name of GKE"
-          - string:
-              scope: GLOBAL
-              id: "image-pull-secret"
-              secret: "${QUAY_SECRET}"
-              description: "Secret of quay repository"
-          - string:
-              scope: GLOBAL
-              id: "perform-health-check-image"
-              secret: "${PERFORM_HEALTH_CHECK_IMAGE}"
-              description: "Perform health check image URL"
-          - string:
-              scope: GLOBAL
-              id: "kafka-topic"
-              secret: "${KAFKA_TOPIC}"
-              description: "Perform health check image URL"
-          - string:
-              scope: GLOBAL
-              id: "operator-namespace"
-              secret: "${OPERATOR_NAMESPACE}"
-              description: "Namespace of operator"
           
 unclassified:
   location:
