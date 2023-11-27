@@ -10,15 +10,14 @@ jobs:
   CI:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
       - name: Replace Secrets
         run: |
-              # Access the secret values
 
           
               cd packer/jenkins
-              ls -al
         
               JENKINS_ADMIN_ID="${{ secrets.JENKINS_ADMIN_ID }}"
               JENKINS_ADMIN_PASSWORD="${{ secrets.JENKINS_ADMIN_PASSWORD }}"
@@ -27,9 +26,8 @@ jobs:
               QUAY_ADMIN_ID="${{ secrets.QUAY_ADMIN_ID }}"
               QUAY_PASSWORD="${{ secrets.QUAY_PASSWORD }}"
 
-  
+              echo "Replacing secrets..."
 
-              # Write the environment variables to a file
               cat <<EOL > .docker.env
               JENKINS_ADMIN_ID="$JENKINS_ADMIN_ID"
               JENKINS_ADMIN_PASSWORD="$JENKINS_ADMIN_PASSWORD"
