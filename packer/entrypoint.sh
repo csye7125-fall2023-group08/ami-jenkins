@@ -37,6 +37,3 @@ sudo apt install certbot python3-certbot-nginx -y
 
 # Start Nginx
 sudo systemctl enable nginx
-#sudo systemctl restart nginx
-
-
