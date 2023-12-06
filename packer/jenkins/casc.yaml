@@ -33,6 +33,8 @@ jenkins:
         value: "${OPERATOR_NAMESPACE}"
       - key: "kafkaNamespace"
         value: "${KAFKA_NAMESPACE}"
+      - key: "loadbalancerIP"
+        value: "${LOAD_BALANCER_IP}"
 
 security:
   gitHostKeyVerificationConfiguration:
