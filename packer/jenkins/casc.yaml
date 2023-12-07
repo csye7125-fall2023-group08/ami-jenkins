@@ -35,6 +35,8 @@ jenkins:
         value: "${KAFKA_NAMESPACE}"
       - key: "loadbalancerIP"
         value: "${LOAD_BALANCER_IP}"
+      - key: "gatewayHost"
+        value: "${GATEWAY_HOST}"
 
 security:
   gitHostKeyVerificationConfiguration:
